@@ -166,8 +166,4 @@ public class TestaPilha {
 			pilha.multitop(10);
 	    });
 	}
-	
-
-	
-
 }
