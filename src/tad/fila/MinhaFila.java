@@ -7,50 +7,65 @@ package tad.fila;
  *
  */
 public class MinhaFila implements FilaIF<Integer> {
-	
+
 	private int tamanho = 10;
-	
 	private int cauda = 1;
 	private int cabeca = 0;
-	
 	private Integer[] meusDados = null;
 
 	public MinhaFila(int tamanhoInicial) {
 		tamanho = tamanhoInicial;
+		meusDados = new Integer[tamanho];
 	}
-	
+
 	public MinhaFila() {
+		meusDados = new Integer[tamanho];
 	}
 
 	@Override
-	public void enfileirar(Integer item) {
-		throw new UnsupportedOperationException("Implementar");
-		
+	public void enfileirar(Integer item) throws FilaCheiaException {
+		if (isFull()) {
+			throw new FilaCheiaException("Fila cheia. Não é possível enfileirar o item.");
+		}
+		meusDados[cauda] = item;
+		cauda = (cauda + 1) % tamanho;
 	}
 
 	@Override
-	public Integer desenfileirar() {
-		throw new UnsupportedOperationException("Implementar");
+	public Integer desenfileirar() throws FilaVaziaException {
+		if (isEmpty()) {
+			throw new FilaVaziaException("Fila vazia. Não é possível desenfileirar.");
+		}
+		Integer item = meusDados[cabeca];
+		cabeca = (cabeca + 1) % tamanho;
+		return item;
 	}
 
 	@Override
-	public Integer verificarCauda() {
-		throw new UnsupportedOperationException("Implementar");
+	public Integer verificarCauda() throws FilaVaziaException {
+		if (isEmpty()) {
+			throw new FilaVaziaException("Fila vazia. Não é possível verificar a cauda.");
+		}
+		return meusDados[(cauda - 1 + tamanho) % tamanho];
 	}
 
 	@Override
-	public Integer verificarCabeca() {
-		throw new UnsupportedOperationException("Implementar");
+	public Integer verificarCabeca() throws FilaVaziaException {
+		if (isEmpty()) {
+			throw new FilaVaziaException("Fila vazia. Não é possível verificar a cabeça.");
+		}
+		return meusDados[cabeca];
 	}
 
 	@Override
 	public boolean isEmpty() {
-		throw new UnsupportedOperationException("Implementar");
+		return cabeca == cauda;
 	}
 
 	@Override
 	public boolean isFull() {
-		throw new UnsupportedOperationException("Implementar");
+		return (cauda + 1) % tamanho == cabeca;
 	}
-
 }
+
+

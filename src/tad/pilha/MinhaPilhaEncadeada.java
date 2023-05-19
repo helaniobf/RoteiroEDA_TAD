@@ -1,38 +1,54 @@
 package tad.pilha;
 
 public class MinhaPilhaEncadeada implements PilhaIF<Integer> {
-	
-//	private ListaEncadeadaIF<Integer> listaEncadeada = new MinhaListaEncadeada<Integer>();
+
+	private ListaEncadeadaIF<Integer> listaEncadeada;
+
+	public MinhaPilhaEncadeada() {
+		listaEncadeada = new MinhaListaEncadeada<>();
+	}
 
 	@Override
 	public void empilhar(Integer item) throws PilhaCheiaException {
-		// TODO Auto-generated method stub
-//		listaEncadeada.insere(item);
-		
+		listaEncadeada.insere(item);
 	}
 
 	@Override
 	public Integer desempilhar() throws PilhaVaziaException {
-		// TODO Auto-generated method stub
-		return null;
+		if (isEmpty()) {
+			throw new PilhaVaziaException();
+		}
+		Integer topo = listaEncadeada.remove();
+		return topo;
 	}
 
 	@Override
 	public Integer topo() {
-		// TODO Auto-generated method stub
-		return null;
+		if (isEmpty()) {
+			return null;
+		}
+		return listaEncadeada.getInicio().getDado();
 	}
 
 	@Override
 	public PilhaIF<Integer> multitop(int k) {
-		// TODO Auto-generated method stub
-		return null;
+		if (k <= 0) {
+			throw new IllegalArgumentException("O valor de k é inválido.");
+		}
+
+		PilhaIF<Integer> pilhaMultiTop = new MinhaPilhaEncadeada();
+		int elementosCopiados = 0;
+		ListaEncadeadaNo<Integer> current = listaEncadeada.getInicio();
+		while (elementosCopiados < k && current != null) {
+			pilhaMultiTop.empilhar(current.getDado());
+			current = current.getProximo();
+			elementosCopiados++;
+		}
+		return pilhaMultiTop;
 	}
 
 	@Override
 	public boolean isEmpty() {
-		// TODO Auto-generated method stub
-		return false;
+		return listaEncadeada.estaVazia();
 	}
-
 }

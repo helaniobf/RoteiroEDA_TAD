@@ -79,20 +79,20 @@ public class TestaFila {
 			Assert.assertEquals(new Integer(3), fila.verificarCabeca());
 			Assert.assertEquals(new Integer(3), fila.desenfileirar());
 			Assert.assertEquals(new Integer(5), fila.verificarCabeca());
-	
+
 			fila.enfileirar(15);
-			
+
 			Assert.assertEquals(new Integer(5), fila.desenfileirar());
 			Assert.assertEquals(new Integer(7), fila.verificarCabeca());
-	
+
 			fila.enfileirar(20);
-			
+
 			Assert.assertEquals(new Integer(7), fila.desenfileirar());
 			Assert.assertEquals(new Integer(4), fila.verificarCabeca());
-	
+
 			Assert.assertEquals(new Integer(4), fila.desenfileirar());
 			Assert.assertEquals(new Integer(2), fila.verificarCabeca());
-	
+
 			Assert.assertEquals(new Integer(2), fila.desenfileirar());
 		} catch(FilaCheiaException fce) {
 			Assert.fail("fila cheia exception lançado indevidamente");
@@ -116,7 +116,7 @@ public class TestaFila {
 			Assert.fail("fila vazia exception lançado indevidamente");
 		}
 	}
-	
+
 	@Test
 	public void filaVaziaTest() {
 		assertThrows(FilaVaziaException.class, () -> {
@@ -129,7 +129,7 @@ public class TestaFila {
 			fila.desenfileirar();
 	    });
 	}
-	
+
 	@Test
 	public void filaCheiaTest() {
 		assertThrows(FilaCheiaException.class, () -> {
@@ -146,7 +146,7 @@ public class TestaFila {
 			fila.enfileirar(11);
 	    });
 	}
-	
+
 	// Neste teste a fila tem que estourar o tamanho depois de 999
 		@Test(expected = Exception.class)
 		public void enfileirarEstouroTeste() throws Exception {
